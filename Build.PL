@@ -3,22 +3,27 @@ use warnings;
 
 use Module::Build;
 
-my $build = Module::Build->new(
+Module::Build->new(
     module_name       => 'HTML::Template::Compiled::Plugin::VBEscape',
     license           => 'perl',
-    dist_author       => 'Steffen Winkler - steffenw@cpan.org',
+    dist_abstract     => 'HTML::Template::Compiled::Plugin::VBEscape - VB-Script-Escaping for HTC',
+    dist_author       => 'Steffen Winkler <steffenw at cpan.org>',
     dist_version_from => 'lib/HTML/Template/Compiled/Plugin/VBEscape.pm',
     requires          => {
-        'HTML::Template::Compiled' => '0',
+        'HTML::Template::Compiled' => 0,
     },
     build_requires => {
-        'Test::More' => '0',
+        'Test::Simple' => 0, # for Test::More
+    },
+    recommends => {
+        # build
+        'Test::Pod'           => '1.14',
+        'Test::Pod::Coverage' => '1.04',
+        'Test::More'          => 0,
     },
     create_makefile_pl   => 'traditional',
     recursive_test_files => 1,
-    add_to_cleanup       => [
-        'META.yml', '*.bak', '*.gz', 'Makefile.PL',
-    ],
-);
-
-$build->create_build_script();
+    add_to_cleanup       => [ qw(
+        META.yml *.bak *.gz Makefile.PL
+    ) ],
+)->create_build_script();

@@ -1,11 +1,18 @@
-HTML::Template::Compiled::Plugin::VBEscape version 0.01
+HTML::Template::Compiled::Plugin::VBEscape version 0.02
 =======================================================
 
 VB-Script-Escaping for HTML::Template::Compiled
 
 INSTALLATION
 
-To install this module type the following:
+To install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+Alternatively, to install with Module::Build, you can use the following commands:
 
     perl Build.PL
     ./Build
@@ -20,9 +27,9 @@ This module requires these other modules and libraries:
 
 COPYRIGHT AND LICENCE
 
-Copyright (c) 2007,
+Copyright (c) 2007 - 2009,
 Steffen Winkler
-steffenw@cpan.org.
+steffenw at cpan.org.
 All rights reserved.
 
 This module is free software;

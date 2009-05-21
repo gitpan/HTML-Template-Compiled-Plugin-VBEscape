@@ -11,13 +11,14 @@ BEGIN {
 }
 
 my $htc = HTML::Template::Compiled->new(
-    tagstyle  => [qw(-classic -comment +asp)],
-    plugin    => [qw(HTML::Template::Compiled::Plugin::VBEscape)],
-    scalarref => \<<'EOT');
+    tagstyle       => [qw(-classic -comment +asp)],
+    plugin         => [qw(HTML::Template::Compiled::Plugin::VBEscape)],
+    default_escape => 'VB',
+    scalarref      => \<<'EOT');
 <script language="VBScript"><!--
-    string1 = "<%= attribute%>"
-    string2 = "<%= cdata ESCAPE=VB%>"
-    string3 = "<%= undef ESCAPE=VB%>"
+    string1 = "<%= attribute ESCAPE=0%>"
+    string2 = "<%= cdata%>"
+    string3 = "<%= undef%>"
 '--></script>
 EOT
 $htc->param(

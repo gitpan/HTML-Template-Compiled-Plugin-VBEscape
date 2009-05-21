@@ -3,7 +3,7 @@ package HTML::Template::Compiled::Plugin::VBEscape;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use HTML::Template::Compiled;
 
@@ -14,7 +14,7 @@ sub register {
 
     my %plugs = (
         escape => {
-            # <tmpl_var foo escape=VB>
+            # <tmpl_var foo ESCAPE=VB>
             VB      => \&escape_vb,
             VB_ATTR => __PACKAGE__ . '::escape_vb',
         },
@@ -36,28 +36,54 @@ sub escape_vb {
 
 __END__
 
-=pod
-
 =head1 NAME
 
 HTML::Template::Compiled::Plugin::VBEscape - VB-Script-Escaping for HTC
 
+=for RCS
+
+$Id: $
+
+$HeadURL: $
+
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 
- use HTML::Template::Compiled::Plugin::VBEscape;
+    use HTML::Template::Compiled::Plugin::VBEscape;
 
- my $htc = HTML::Template::Compiled->new(
-     plugin => [qw(HTML::Template::Compiled::Plugin::VBEscape)],
-     ...
- );
+    my $htc = HTML::Template::Compiled->new(
+        plugin    => [qw(HTML::Template::Compiled::Plugin::VBEscape)],
+        tagstyle  => [qw(-classic -comment +asp)],
+        scalarref => \<<'EOVB');
+    );
+    <script language="VBScript"><!--
+        string1 = "<%= attribute ESCAPE=VB%>"
+        string2 = "<%= cdata ESCAPE=VB%>"
+    '--></script>
+    EOVB
+    $htc->param(
+        attribute => 'foo "bar"',
+        cdata     => 'text "with" double quotes',
+    );
+    print $htc->output();
+
+Output:
+
+    <script language="VBScript"><!--
+        string1 = "foo ""bar"""
+        string2 = "text ""with"" double quotes"
+    '--></script>
 
 =head1 DESCRIPTION
 
 VB-Script-Escaping for HTML::Template::Compiled
+
+=head1 EXAMPLE
+
+Inside of this Distribution is a directory named example. Run this *.pl files.
 
 =head1 SUBROUTINES/METHODS
 
@@ -73,32 +99,6 @@ Escapes data for VB CDATA or for VB attributes.
 
 =back
 
-=head1 EXAMPLE
-
- use HTML::Template::Compiled::Plugin::VBEscape;
- my $htc = HTML::Template::Compiled->new(
-     plugin         => [qw(HTML::Template::Compiled::Plugin::VBEscape)],
-     tagstyle       => [qw(-classic -comment +asp)],
-     default_escape => 'VB_ATTR',
-     scalarref      => \<<'EOVB');
- <script language="VBScript"><!--
-     string1 = "<%= attribute%>"
-     string2 = "<%= cdata escape=VB%>"
- '--></script>
- EOVB
- $htc->param(
-     attribute => 'foo "bar"',
-     cdata     => 'text "with" double quotes',
- );
- print $htc->output();
-
-Output:
-
- <script language="VBScript"><!--
-     string1 = "foo "bar""
-     string2 = "text ""with"" double quotes"
- '--></script>
-
 =head1 DIAGNOSTICS
 
 none
@@ -109,7 +109,7 @@ none
 
 =head1 DEPENDENCIES
 
-none
+L<HTML::Template::Compiled>
 
 =head1 INCOMPATIBILITIES
 
@@ -129,9 +129,9 @@ Steffen Winkler
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2007,
+Copyright (c) 2007 - 2009,
 Steffen Winkler
-C<< <steffenw@cpan.org> >>.
+C<< <steffenw at cpan.org> >>.
 All rights reserved.
 
 This module is free software;
