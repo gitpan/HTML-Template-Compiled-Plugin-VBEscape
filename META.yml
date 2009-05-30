@@ -1,6 +1,6 @@
 ---
 name: HTML-Template-Compiled-Plugin-VBEscape
-version: 0.02
+version: 0.03
 author:
   - 'Steffen Winkler <steffenw at cpan.org>'
 abstract: 'HTML::Template::Compiled::Plugin::VBEscape - VB-Script-Escaping for HTC'
@@ -9,7 +9,9 @@ resources:
   license: http://dev.perl.org/licenses/
 requires:
   HTML::Template::Compiled: 0
+  perl: 5.006001
 build_requires:
+  Test::NoWarnings: 0
   Test::Simple: 0
 recommends:
   Test::More: 0
@@ -18,7 +20,7 @@ recommends:
 provides:
   HTML::Template::Compiled::Plugin::VBEscape:
     file: lib/HTML/Template/Compiled/Plugin/VBEscape.pm
-    version: 0.02
+    version: 0.03
 generated_by: Module::Build version 0.33
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html

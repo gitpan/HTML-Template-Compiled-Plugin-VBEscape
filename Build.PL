@@ -10,10 +10,13 @@ Module::Build->new(
     dist_author       => 'Steffen Winkler <steffenw at cpan.org>',
     dist_version_from => 'lib/HTML/Template/Compiled/Plugin/VBEscape.pm',
     requires          => {
+        perl                       => 5.006001,
         'HTML::Template::Compiled' => 0,
     },
     build_requires => {
-        'Test::Simple' => 0, # for Test::More
+        # Cwd              => 0, # perl dist
+        'Test::Simple'     => 0, # for Test::More
+        'Test::NoWarnings' => 0,
     },
     recommends => {
         # build

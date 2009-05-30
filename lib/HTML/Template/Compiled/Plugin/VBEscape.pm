@@ -3,7 +3,7 @@ package HTML::Template::Compiled::Plugin::VBEscape;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use HTML::Template::Compiled;
 
@@ -32,6 +32,8 @@ sub escape_vb {
     return $escaped;
 }
 
+# $Id$
+
 1;
 
 __END__
@@ -40,15 +42,9 @@ __END__
 
 HTML::Template::Compiled::Plugin::VBEscape - VB-Script-Escaping for HTC
 
-=for RCS
-
-$Id: $
-
-$HeadURL: $
-
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
